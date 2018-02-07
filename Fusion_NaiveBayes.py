@@ -45,25 +45,17 @@ class Fusion_NaiveBayes(object):
             self.labels_count[label] = self.labels_count.get(label) + len(df)
             
     def build_distribution(self,df,col):
-        if (is_numeric_dtype(df[col])):
-            arr = np.array(list(df[col]))
-            mean, std = np.mean(arr), np.std(arr)
-            return Gaussian_Distribution(mean,std,len(arr))
-        if (is_string_dtype(df[col])):
-            value_counts = df[col].value_counts()
-            categories_count = {x[0]:int(x[1]) for x in value_counts.iteritems()}
-            return Multinomial_Distribution(categories_count)
-#        try:
-#            if (is_numeric_dtype(df[col])):
-#                arr = np.array(list(df[col]))
-#                mean, std = np.mean(arr), np.std(arr)
-#                return Gaussian_Distribution(mean,std,len(arr))
-#            if (is_string_dtype(df[col])):
-#                value_counts = df[col].value_counts()
-#                categories_count = {x[0]:int(x[1]) for x in value_counts.iteritems()}
-#                return Multinomial_Distribution(categories_count)
-#        except:
-#            print("Invalid value type for numeric or categorical column. Please check value type")
+        try:
+            if (is_numeric_dtype(df[col])):
+                arr = np.array(list(df[col]))
+                mean, std = np.mean(arr), np.std(arr)
+                return Gaussian_Distribution(mean,std,len(arr))
+            if (is_string_dtype(df[col])):
+                value_counts = df[col].value_counts()
+                categories_count = {x[0]:int(x[1]) for x in value_counts.iteritems()}
+                return Multinomial_Distribution(categories_count)
+        except:
+            print("Invalid value type for numeric or categorical column. Please check value type")
     
     def predict(self,df_features):
         if self.model == None:
