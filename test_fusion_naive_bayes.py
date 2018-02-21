@@ -4,6 +4,8 @@ Created on Mon Feb  5 13:37:31 2018
 
 @author: Pham Dinh Thang
 
+Test for the Fusion Naive Bayes on two dataset
+
 Iris dataset: https://archive.ics.uci.edu/ml/datasets/iris
 Census income dataset: https://archive.ics.uci.edu/ml/datasets/census+income
 """
